@@ -1,0 +1,32 @@
+# Pinned environment for reference runs of the official GBPN code (CPU).
+# Mirrors install_requirements.sh (torch 1.7.1, PyG 1.7.0 and its extensions), with CPU
+# wheels in place of cu102. Build the sampler afterwards: `uv run make build_cnetworkx`.
+[project]
+name = "gbpn-reference"
+version = "0"
+requires-python = "==3.8.*"
+dependencies = [
+  "torch==1.7.1+cpu",
+  "torch-scatter==2.0.5",
+  "torch-sparse==0.6.9",
+  "torch-cluster==1.5.9",
+  "torch-spline-conv==1.2.1",
+  "torch-geometric==1.7.0",
+  # Imported by torch_geometric 1.7.0 at load time but not declared by it; 1.x renamed
+  # the module from google_drive_downloader.
+  "googledrivedownloader==0.4",
+  "ogb",
+  "pybind11",
+  "numpy<1.24",
+  "pandas",
+  "scikit-learn",
+  "matplotlib",
+  "seaborn",
+]
+
+[tool.uv]
+package = false
+find-links = [
+  "https://download.pytorch.org/whl/torch_stable.html",
+  "https://data.pyg.org/whl/torch-1.7.0+cpu.html",
+]

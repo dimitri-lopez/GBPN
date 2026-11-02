@@ -1,0 +1,11 @@
+.venv/
+__pycache__/
+cnetworkx*.so
+workspace/
+# Downloaded at runtime by PyG / OGB.
+datasets/Cora/
+datasets/CiteSeer/
+datasets/PubMed/
+datasets/CS/
+datasets/Physics/
+datasets/ogbn_*/

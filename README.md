@@ -6,6 +6,24 @@ On a high level, a MLP/BP first predicts an initial probabilities for each node'
 
 ![MLP/BP performance on PubMed](figs/demo.svg)
 
+## This fork: pinned CPU environment with uv
+
+Fork used for reference runs in https://github.com/dimitri-lopez/gml-final-liu-lopez.
+It changes the build and environment only; the model and experiment code are upstream's.
+
+```bash
+uv sync --frozen            # Python 3.8, torch 1.7.1+cpu, PyG 1.7.0 (see pyproject.toml)
+uv run make build_cnetworkx # needs a C++17 compiler with OpenMP (gcc 8+)
+make device=cpu run_Sex     # Makefile targets work as documented below, inside `uv run`
+```
+
+On NixOS, build the sampler with `nix-shell -p gcc libxcrypt --run 'uv run make build_cnetworkx'`:
+the Python 3.8 headers need `crypt.h`, and clang there lacks `libomp`.
+
+Changes from upstream: `pyproject.toml` + `uv.lock` (replacing `install_requirements.sh`),
+`Makefile` (extension suffix taken from the active interpreter; `CPPFLAGS` passthrough),
+`.gitignore`.
+
 
 ## Environment Setup
 
