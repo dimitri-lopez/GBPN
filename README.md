@@ -14,7 +14,7 @@ It changes the build and environment only; the model and experiment code are ups
 ```bash
 uv sync --frozen            # Python 3.8, torch 1.7.1+cpu, PyG 1.7.0 (see pyproject.toml)
 uv run make build_cnetworkx # needs a C++17 compiler with OpenMP (gcc 8+)
-make device=cpu run_Sex     # Makefile targets work as documented below, inside `uv run`
+uv run make device=cpu run_Sex  # any Makefile target below; uv run puts the env's python on PATH
 ```
 
 On NixOS, build the sampler with `nix-shell -p gcc libxcrypt --run 'uv run make build_cnetworkx'`:
